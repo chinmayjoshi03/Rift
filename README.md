@@ -1,8 +1,8 @@
-# 🕵️ FinTrace - Advanced Money Laundering Detection System
+# 🕵️ FinTrace - Financial Crime Detection System
 
-> AI-powered graph-based fraud detection system for identifying money muling networks and suspicious financial patterns in real-time.
+> Graph-based fraud detection system for identifying money muling networks and suspicious financial patterns in transaction data.
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-blue)](https://your-demo-url.com)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-blue)](https://fintrace-eight.vercel.app)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.11-blue)](https://www.python.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18-green)](https://nodejs.org/)
@@ -10,8 +10,9 @@
 
 ## 🌐 Live Demo
 
-**Frontend:** [https://your-frontend-url.com](https://your-frontend-url.com)  
-**API Documentation:** [https://your-backend-url.com/docs](https://your-backend-url.com/docs)
+**Frontend:** [https://fintrace-eight.vercel.app](https://fintrace-eight.vercel.app)  
+**Backend API:** [https://fraud-detection-backend-pvxj.onrender.com](https://fraud-detection-backend-pvxj.onrender.com)  
+**Source Code:** [https://github.com/chinmayjoshi03/Rift](https://github.com/chinmayjoshi03/Rift)
 
 > Upload `sample_transactions.csv` to see the system in action!
 
@@ -36,7 +37,7 @@
 
 ## 🎯 Overview
 
-MuleGuard AI is an advanced fraud detection system that uses graph-based algorithms and pattern recognition to identify money laundering networks, specifically targeting:
+FinTrace is an advanced fraud detection system that uses graph-based algorithms and pattern recognition to identify money laundering networks, specifically targeting:
 
 - **Money Muling Rings**: Circular transaction patterns indicating coordinated fraud
 - **Smurfing Networks**: Structuring patterns to avoid detection thresholds
@@ -768,32 +769,29 @@ See [BACKEND_RESPONSE_FORMAT.md](BACKEND_RESPONSE_FORMAT.md) for complete schema
 
 ## 👥 Team Members
 
-| Name | Role | Contributions | Contact |
-|------|------|---------------|---------|
-| **[Your Name]** | Full Stack Developer | Architecture, Backend, Frontend | [@github](https://github.com/username) |
-| **[Team Member 2]** | ML Engineer | Detection Algorithms, Scoring | [@github](https://github.com/username) |
-| **[Team Member 3]** | Frontend Developer | UI/UX, Visualization | [@github](https://github.com/username) |
-| **[Team Member 4]** | DevOps Engineer | Deployment, CI/CD | [@github](https://github.com/username) |
+| Name | Role | Contributions |
+|------|------|---------------|
+| **Sarvesh** | Frontend/UI Developer | User Interface, React Components, Styling |
+| **Vivek** | Frontend/UI Developer | Visualization, D3.js Integration, UX Design |
+| **Prathmesh** | Backend Developer | API Gateway, SSE Streaming, File Handling |
+| **Chinmay** | Python Model Developer | Detection Algorithms, Graph Analysis, Scoring Engine |
 
 ### Contributions
 
-- **Algorithm Design**: [Team Member 2]
-- **Backend Development**: [Your Name]
-- **Frontend Development**: [Team Member 3]
-- **Graph Visualization**: [Team Member 3]
+- **Detection Algorithms**: Chinmay
+- **Backend API**: Prathmesh
+- **Frontend UI**: Sarvesh, Vivek
+- **Graph Visualization**: Vivek
 - **Testing & QA**: All team members
-- **Documentation**: [Your Name]
-- **Deployment**: [Team Member 4]
+- **Documentation**: Chinmay, Prathmesh
+- **Deployment**: Prathmesh, Chinmay
 
 ---
 
 ## 📚 Additional Documentation
 
-- [Deployment Guide](DEPLOYMENT_GUIDE.md) - Production deployment instructions
-- [Frontend Setup](FRONTEND_SETUP.md) - Detailed frontend documentation
-- [Testing Guide](TESTING.md) - Testing procedures and examples
-- [API Documentation](ENDPOINT_TEST_REPORT.md) - Complete API reference
-- [System Overview](SYSTEM_OVERVIEW.md) - Detailed system architecture
+- [Deployment Status](DEPLOYMENT_STATUS.md) - Current deployment status and fixes
+- [Render Fix Guide](RENDER_FIX.md) - Troubleshooting deployment issues
 
 ---
 
@@ -828,9 +826,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For questions or issues:
-- 📧 Email: support@muledetect.com
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/fraud-detection/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/fraud-detection/discussions)
+- 🐛 Issues: [GitHub Issues](https://github.com/chinmayjoshi03/Rift/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/chinmayjoshi03/Rift/discussions)
 
 ---
 
@@ -849,8 +846,8 @@ For questions or issues:
 
 <div align="center">
 
-**Built with ❤️ by the MuleGuard AI Team**
+**Built with ❤️ by the FinTrace Team**
 
-[Live Demo](https://your-demo-url.com) • [Documentation](https://docs.muledetect.com) • [Report Bug](https://github.com/yourusername/fraud-detection/issues)
+[Live Demo](https://fintrace-eight.vercel.app) • [Source Code](https://github.com/chinmayjoshi03/Rift) • [Report Bug](https://github.com/chinmayjoshi03/Rift/issues)
 
 </div>
