@@ -102,7 +102,7 @@ export default function UploadSection() {
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue/10 border border-blue/20 text-blue text-xs font-semibold mb-6"
           >
             <SparklesIcon className="w-4 h-4" />
-            <span>AI-Powered Financial Intelligence</span>
+            <span>Graph-Based Financial Intelligence</span>
           </motion.div>
 
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight tracking-tight">

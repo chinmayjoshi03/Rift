@@ -21,7 +21,7 @@ export default function AboutPage() {
       animate="show"
     >
       <motion.div variants={itemVariants} className="text-center mb-6">
-        <h1 className="text-3xl font-bold text-white mb-2">About Mule<span className="text-blue">Detect</span></h1>
+        <h1 className="text-3xl font-bold text-white mb-2">About Fin<span className="text-blue">Trace</span></h1>
         <p className="text-gray-medium">Advanced Network Analysis for Financial Forensics</p>
       </motion.div>
 

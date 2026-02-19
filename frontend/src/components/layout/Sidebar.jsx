@@ -25,9 +25,9 @@ export default function Sidebar() {
     >
       <div className="p-8">
         <h1 className="text-2xl font-bold bg-gradient-to-r from-blue to-cyan-400 bg-clip-text text-transparent">
-          MuleGuard AI
+          FinTrace
         </h1>
-        <p className="text-xs text-gray-medium mt-1">Advanced Fraud Detection</p>
+        <p className="text-xs text-gray-medium mt-1">Graph-Based Fraud Detection</p>
       </div>
 
       <nav className="flex-1 px-4 space-y-2">

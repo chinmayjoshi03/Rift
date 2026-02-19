@@ -84,7 +84,7 @@ export default function Dashboard() {
 
     const link = document.createElement('a');
     link.href = url;
-    link.download = `fraud_detection_report_${state.jobId || 'demo'}_${Date.now()}.json`;
+    link.download = `FinTrace_Report_${state.jobId || 'demo'}_${Date.now()}.json`;
     document.body.appendChild(link);
     link.click();
 
