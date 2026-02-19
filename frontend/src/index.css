@@ -68,6 +68,11 @@
   }
 }
 
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Custom Webkit Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

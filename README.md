@@ -1,4 +1,4 @@
-# 🕵️ MuleGuard AI - Advanced Money Laundering Detection System
+# 🕵️ FinTrace - Advanced Money Laundering Detection System
 
 > AI-powered graph-based fraud detection system for identifying money muling networks and suspicious financial patterns in real-time.
 
