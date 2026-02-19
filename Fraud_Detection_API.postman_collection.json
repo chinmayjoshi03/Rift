@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "fraud-detection-api",
+		"name": "Fraud Detection API",
+		"description": "Complete API testing for Fraud Detection System (Node.js Backend + Python Model)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Health Check - Backend",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Service is healthy\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response.status).to.eql(\"healthy\");",
+							"});",
+							"",
+							"pm.test(\"Python service is healthy\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response.pythonService.status).to.eql(\"healthy\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"health"
+					]
+				},
+				"description": "Check if Node.js backend and Python service are both healthy"
+			},
+			"response": []
+		},
+		{
+			"name": "2. Health Check - Python",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Service is healthy\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response.status).to.eql(\"healthy\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{python_url}}/health",
+					"host": [
+						"{{python_url}}"
+					],
+					"path": [
+						"health"
+					]
+				},
+				"description": "Check if Python model service is healthy"
+			},
+			"response": []
+		},
+		{
+			"name": "3. Upload CSV for Analysis",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"JobId is returned\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response.jobId).to.be.a('string');",
+							"    pm.expect(response.jobId).to.have.lengthOf.above(0);",
+							"});",
+							"",
+							"// Auto-save jobId to collection variable",
+							"if (pm.response.code === 200) {",
+							"    const response = pm.response.json();",
+							"    pm.collectionVariables.set(\"job_id\", response.jobId);",
+							"    console.log(\"Job ID saved:\", response.jobId);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "sample_transactions.csv",
+							"description": "CSV file with transaction data"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/analyze",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"analyze"
+					]
+				},
+				"description": "Upload CSV file for fraud detection analysis. Returns a jobId for tracking."
+			},
+			"response": []
+		},
+		{
+			"name": "4. Get Analysis Results",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Has suspicious accounts\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response.suspicious_accounts).to.be.an('array');",
+							"});",
+							"",
+							"pm.test(\"Has fraud rings\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response.fraud_rings).to.be.an('array');",
+							"});",
+							"",
+							"pm.test(\"Has summary\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response.summary).to.be.an('object');",
+							"    pm.expect(response.summary.total_accounts).to.be.above(0);",
+							"});",
+							"",
+							"pm.test(\"Detected fraud rings in sample data\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response.summary.fraud_rings_detected).to.be.above(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/results/{{job_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"results",
+						"{{job_id}}"
+					]
+				},
+				"description": "Get analysis results using jobId. Wait 5-10 seconds after upload before calling."
+			},
+			"response": []
+		},
+		{
+			"name": "5. SSE Stream (View Only)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/stream/{{job_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"stream",
+						"{{job_id}}"
+					]
+				},
+				"description": "Server-Sent Events stream for real-time progress. Note: Postman doesn't stream in real-time, but you can see all events after completion."
+			},
+			"response": []
+		},
+		{
+			"name": "6. Direct Python Detection",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Has complete response\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response).to.have.property('suspicious_accounts');",
+							"    pm.expect(response).to.have.property('fraud_rings');",
+							"    pm.expect(response).to.have.property('summary');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "sample_transactions.csv",
+							"description": "CSV file with transaction data"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{python_url}}/detect",
+					"host": [
+						"{{python_url}}"
+					],
+					"path": [
+						"detect"
+					]
+				},
+				"description": "Direct call to Python service (bypasses Node.js). Useful for testing Python independently."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3001",
+			"type": "string"
+		},
+		{
+			"key": "python_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "job_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
