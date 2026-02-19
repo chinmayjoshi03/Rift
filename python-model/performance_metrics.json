@@ -1,0 +1,187 @@
+[
+  {
+    "timestamp": "2026-02-19T09:31:05.751646",
+    "total_accounts": 17,
+    "total_transactions": 16,
+    "suspicious_accounts": 11,
+    "fraud_rings": 3,
+    "processing_time_seconds": 0.025319814682006836,
+    "fraud_rate": 0.6470588235294118,
+    "config_used": {
+      "smurfing": {
+        "threshold": 10000.0,
+        "time_window_hours": 72,
+        "min_fan_degree": 5,
+        "below_threshold_ratio": 0.8
+      },
+      "shell_detection": {
+        "pass_through_min": 0.8,
+        "pass_through_max": 1.2,
+        "min_chain_length": 3,
+        "velocity_threshold_hours": 24
+      },
+      "scoring": {
+        "cycle_member": 50,
+        "fan_in": 30,
+        "fan_out": 30,
+        "shell": 20,
+        "high_velocity": 10,
+        "below_threshold": 20,
+        "multiple_patterns": 10
+      },
+      "filtering": {
+        "min_suspicion_score": 40.0,
+        "merchant_min_tx": 50,
+        "payroll_regularity": 0.6
+      }
+    }
+  },
+  {
+    "timestamp": "2026-02-19T09:35:01.605042",
+    "total_accounts": 17,
+    "total_transactions": 16,
+    "suspicious_accounts": 12,
+    "fraud_rings": 3,
+    "processing_time_seconds": 0.011986970901489258,
+    "fraud_rate": 0.7058823529411765,
+    "config_used": {
+      "smurfing": {
+        "threshold": 10000.0,
+        "time_window_hours": 72,
+        "min_fan_degree": 5,
+        "below_threshold_ratio": 0.8
+      },
+      "shell_detection": {
+        "pass_through_min": 0.8,
+        "pass_through_max": 1.2,
+        "min_chain_length": 3,
+        "velocity_threshold_hours": 24
+      },
+      "scoring": {
+        "cycle_member": 50,
+        "fan_in": 30,
+        "fan_out": 30,
+        "shell": 20,
+        "high_velocity": 10,
+        "below_threshold": 20,
+        "multiple_patterns": 10
+      },
+      "filtering": {
+        "min_suspicion_score": 40.0,
+        "merchant_min_tx": 50,
+        "payroll_regularity": 0.6
+      }
+    }
+  },
+  {
+    "timestamp": "2026-02-19T09:37:33.745490",
+    "total_accounts": 17,
+    "total_transactions": 16,
+    "suspicious_accounts": 12,
+    "fraud_rings": 3,
+    "processing_time_seconds": 0.015047788619995117,
+    "fraud_rate": 0.7058823529411765,
+    "config_used": {
+      "smurfing": {
+        "threshold": 10000.0,
+        "time_window_hours": 72,
+        "min_fan_degree": 5,
+        "below_threshold_ratio": 0.8
+      },
+      "shell_detection": {
+        "pass_through_min": 0.8,
+        "pass_through_max": 1.2,
+        "min_chain_length": 3,
+        "velocity_threshold_hours": 24
+      },
+      "scoring": {
+        "cycle_member": 50,
+        "fan_in": 30,
+        "fan_out": 30,
+        "shell": 20,
+        "high_velocity": 10,
+        "below_threshold": 20,
+        "multiple_patterns": 10
+      },
+      "filtering": {
+        "min_suspicion_score": 40.0,
+        "merchant_min_tx": 50,
+        "payroll_regularity": 0.6
+      }
+    }
+  },
+  {
+    "timestamp": "2026-02-19T09:38:01.107591",
+    "total_accounts": 17,
+    "total_transactions": 16,
+    "suspicious_accounts": 12,
+    "fraud_rings": 3,
+    "processing_time_seconds": 0.006783008575439453,
+    "fraud_rate": 0.7058823529411765,
+    "config_used": {
+      "smurfing": {
+        "threshold": 10000.0,
+        "time_window_hours": 72,
+        "min_fan_degree": 5,
+        "below_threshold_ratio": 0.8
+      },
+      "shell_detection": {
+        "pass_through_min": 0.8,
+        "pass_through_max": 1.2,
+        "min_chain_length": 3,
+        "velocity_threshold_hours": 24
+      },
+      "scoring": {
+        "cycle_member": 50,
+        "fan_in": 30,
+        "fan_out": 30,
+        "shell": 20,
+        "high_velocity": 10,
+        "below_threshold": 20,
+        "multiple_patterns": 10
+      },
+      "filtering": {
+        "min_suspicion_score": 40.0,
+        "merchant_min_tx": 50,
+        "payroll_regularity": 0.6
+      }
+    }
+  },
+  {
+    "timestamp": "2026-02-19T10:02:38.686879",
+    "total_accounts": 17,
+    "total_transactions": 16,
+    "suspicious_accounts": 12,
+    "fraud_rings": 3,
+    "processing_time_seconds": 0.01870107650756836,
+    "fraud_rate": 0.7058823529411765,
+    "config_used": {
+      "smurfing": {
+        "threshold": 10000.0,
+        "time_window_hours": 72,
+        "min_fan_degree": 5,
+        "below_threshold_ratio": 0.8
+      },
+      "shell_detection": {
+        "pass_through_min": 0.8,
+        "pass_through_max": 1.2,
+        "min_chain_length": 3,
+        "velocity_threshold_hours": 24
+      },
+      "scoring": {
+        "cycle_member": 50,
+        "fan_in": 30,
+        "fan_out": 30,
+        "shell": 20,
+        "high_velocity": 10,
+        "below_threshold": 20,
+        "multiple_patterns": 10
+      },
+      "filtering": {
+        "min_suspicion_score": 40.0,
+        "merchant_min_tx": 50,
+        "payroll_regularity": 0.6
+      }
+    }
+  }
+]

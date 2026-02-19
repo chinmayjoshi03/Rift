@@ -1,0 +1,10 @@
+🧪 FRAUD DETECTION SYSTEM - ENDPOINT TEST RESULTS
+==================================================
+
+Test Date: $(date)
+Services: Python (8000), Node.js (3001)
+
+
+📍 PYTHON SERVICE ENDPOINTS (Port 8000)
+========================================
+

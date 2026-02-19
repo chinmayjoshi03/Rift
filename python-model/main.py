@@ -2,14 +2,30 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import RequestValidationError
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from routes.detect import router as detect_router
+from routes.detect_enhanced import router as detect_enhanced_router
+from utils.error_handlers import (
+    http_exception_handler,
+    validation_exception_handler,
+    fraud_detection_exception_handler,
+    general_exception_handler,
+    FraudDetectionError
+)
 import os
 
 app = FastAPI(
     title="Fraud Detection Model Service",
-    description="Python-based fraud detection algorithms",
-    version="1.0.0"
+    description="Python-based fraud detection algorithms with enhanced configuration",
+    version="2.0.0"
 )
+
+# Register custom exception handlers
+app.add_exception_handler(StarletteHTTPException, http_exception_handler)
+app.add_exception_handler(RequestValidationError, validation_exception_handler)
+app.add_exception_handler(FraudDetectionError, fraud_detection_exception_handler)
+app.add_exception_handler(Exception, general_exception_handler)
 
 # CORS configuration
 app.add_middleware(
@@ -21,7 +37,8 @@ app.add_middleware(
 )
 
 # Include routes
-app.include_router(detect_router)
+app.include_router(detect_router)  # Original endpoint (unchanged)
+app.include_router(detect_enhanced_router)  # Enhanced endpoint with configuration
 
 
 @app.get("/health")
