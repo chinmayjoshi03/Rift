@@ -152,7 +152,7 @@ async def detect_fraud_enhanced(
     )
     
     # Step 10: Build output
-    result = build_output(filtered_accounts, fraud_rings, graph)
+    result = build_output(filtered_accounts, fraud_rings, graph, processing_time)
     
     # Step 11: Track performance
     processing_time = time.time() - start_time

@@ -20,6 +20,9 @@ async def detect_fraud(file: UploadFile = File(...)):
     
     Accepts CSV file and returns complete fraud detection results.
     """
+    import time
+    start_time = time.time()
+    
     try:
         # Read CSV bytes
         csv_bytes = await file.read()
@@ -56,7 +59,8 @@ async def detect_fraud(file: UploadFile = File(...)):
         )
         
         # Step 7: Build final output
-        result = build_output(filtered_accounts, fraud_rings, graph)
+        processing_time = time.time() - start_time
+        result = build_output(filtered_accounts, fraud_rings, graph, processing_time)
         
         return result
         

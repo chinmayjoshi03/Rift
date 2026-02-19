@@ -109,6 +109,93 @@ router.get('/results/:jobId', (req, res) => {
 });
 
 /**
+ * GET /api/health
+ * Health check endpoint
+ */
+router.get('/health', (req, res) => {
+  res.json({ status: 'healthy', service: 'fraud-detection-backend' });
+});
+
+/**
+ * GET /api/config
+ * Get detection configuration options
+ */
+router.get('/config', async (req, res) => {
+  try {
+    // Proxy to Python service
+    const axios = (await import('axios')).default;
+    const PYTHON_SERVICE_URL = process.env.PYTHON_SERVICE_URL || 'http://localhost:8000';
+    const response = await axios.get(`${PYTHON_SERVICE_URL}/config`, { timeout: 5000 });
+    res.json(response.data);
+  } catch (error) {
+    console.error('Config fetch error:', error.message);
+    // Return default config if Python service is unavailable
+    res.json({
+      current_config: {
+        MIN_SUSPICION_SCORE: 0.3,
+        CYCLE_MIN_SCORE: 0.4,
+        SMURFING_THRESHOLD: 0.35
+      },
+      available_presets: ["aggressive", "conservative", "balanced"],
+      description: {
+        aggressive: "Catches more fraud, more false positives",
+        conservative: "Fewer false positives, might miss some fraud",
+        balanced: "Default balanced configuration"
+      }
+    });
+  }
+});
+
+/**
+ * GET /api/config/presets/:presetName
+ * Get specific preset configuration
+ */
+router.get('/config/presets/:presetName', async (req, res) => {
+  try {
+    const { presetName } = req.params;
+    const axios = (await import('axios')).default;
+    const PYTHON_SERVICE_URL = process.env.PYTHON_SERVICE_URL || 'http://localhost:8000';
+    const response = await axios.get(`${PYTHON_SERVICE_URL}/config/presets/${presetName}`, { timeout: 5000 });
+    res.json(response.data);
+  } catch (error) {
+    console.error('Preset fetch error:', error.message);
+    // Return default preset config
+    const defaultConfigs = {
+      aggressive: { cycle_min_score: 0.3, smurfing_threshold: 0.25 },
+      conservative: { cycle_min_score: 0.6, smurfing_threshold: 0.5 },
+      balanced: { cycle_min_score: 0.4, smurfing_threshold: 0.35 }
+    };
+    res.json({
+      preset: presetName,
+      config: defaultConfigs[presetName] || defaultConfigs.balanced
+    });
+  }
+});
+
+/**
+ * GET /api/metrics
+ * Get performance metrics
+ */
+router.get('/metrics', async (req, res) => {
+  try {
+    const axios = (await import('axios')).default;
+    const PYTHON_SERVICE_URL = process.env.PYTHON_SERVICE_URL || 'http://localhost:8000';
+    const response = await axios.get(`${PYTHON_SERVICE_URL}/metrics`, { timeout: 5000 });
+    res.json(response.data);
+  } catch (error) {
+    console.error('Metrics fetch error:', error.message);
+    // Return empty metrics if Python service is unavailable
+    res.json({
+      total_analyses: 0,
+      avg_processing_time: 0,
+      total_detections: 0,
+      recent_analyses: [],
+      detection_stats: {}
+    });
+  }
+});
+
+/**
  * Async processing function
  */
 async function processAnalysis(jobId, filePath) {
