@@ -151,8 +151,8 @@ router.get('/config', async (req, res) => {
  * Get specific preset configuration
  */
 router.get('/config/presets/:presetName', async (req, res) => {
+  const { presetName } = req.params;
   try {
-    const { presetName } = req.params;
     const axios = (await import('axios')).default;
     const PYTHON_SERVICE_URL = process.env.PYTHON_SERVICE_URL || 'http://localhost:8000';
     const response = await axios.get(`${PYTHON_SERVICE_URL}/config/presets/${presetName}`, { timeout: 5000 });
