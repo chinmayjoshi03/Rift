@@ -57,16 +57,26 @@ def _find_cycles_in_scc(
     adj: Dict[str, list],
     min_len: int = 3,
     max_len: int = 5,
+    max_cycles: int = 100,
 ) -> List[List[str]]:
     """DFS-enumerate simple cycles within an SCC, length 3–5."""
     cycles = []
     scc_list = sorted(scc)  # deterministic ordering
+    
+    # Limit search if SCC is too large
+    if len(scc) > 50:
+        scc_list = scc_list[:50]  # Only search from first 50 nodes
 
     for start in scc_list:
+        if len(cycles) >= max_cycles:
+            break
+            
         visited: Set[str] = set()
         path: List[str] = []
 
         def dfs(node: str, depth: int):
+            if len(cycles) >= max_cycles:
+                return
             if depth > max_len:
                 return
             path.append(node)
@@ -78,6 +88,8 @@ def _find_cycles_in_scc(
                     continue
                 if nb == start and depth >= min_len:
                     cycles.append(list(path))
+                    if len(cycles) >= max_cycles:
+                        return
                 elif nb not in visited:
                     dfs(nb, depth + 1)
 
@@ -135,7 +147,7 @@ def _cycle_risk_score(
     return min(score, 100.0)
 
 
-def detect_cycles(graph: GraphData) -> List[dict]:
+def detect_cycles(graph: GraphData, max_results: int = 50) -> List[dict]:
     """
     Main entry point. Returns list of detected fraud rings (cycles).
 
@@ -152,13 +164,26 @@ def detect_cycles(graph: GraphData) -> List[dict]:
 
     # Keep only SCCs of size >= 2 (potential cycles)
     sccs = [s for s in sccs if len(s) >= 2]
+    
+    # Sort SCCs by size (smaller first, more likely to be fraud rings)
+    sccs.sort(key=len)
+    
+    # Limit number of SCCs to process
+    if len(sccs) > 20:
+        sccs = sccs[:20]
 
     seen_canonical: Set[Tuple[str, ...]] = set()
     results = []
 
     for scc in sccs:
-        raw_cycles = _find_cycles_in_scc(scc, graph.adjacency_list)
+        if len(results) >= max_results:
+            break
+            
+        raw_cycles = _find_cycles_in_scc(scc, graph.adjacency_list, max_cycles=100)
         for cycle in raw_cycles:
+            if len(results) >= max_results:
+                break
+                
             canon = _canonicalize(cycle)
             if canon in seen_canonical:
                 continue
@@ -186,4 +211,4 @@ def detect_cycles(graph: GraphData) -> List[dict]:
 
     # Sort by risk score descending
     results.sort(key=lambda r: r["risk_score"], reverse=True)
-    return results
+    return results[:max_results]

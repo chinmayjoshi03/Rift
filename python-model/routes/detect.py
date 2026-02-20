@@ -1,5 +1,6 @@
 """POST /detect endpoint handler."""
 
+import asyncio
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from graph.builder import build_graph_from_csv
 from graph.cycle_detector import detect_cycles
@@ -11,6 +12,20 @@ from utils.json_builder import build_output
 
 
 router = APIRouter()
+
+
+async def run_cycle_detection(graph, timeout=30):
+    """Run cycle detection with timeout."""
+    try:
+        loop = asyncio.get_event_loop()
+        result = await asyncio.wait_for(
+            loop.run_in_executor(None, detect_cycles, graph),
+            timeout=timeout
+        )
+        return result
+    except asyncio.TimeoutError:
+        print(f"Cycle detection timed out after {timeout}s, returning empty results")
+        return []
 
 
 @router.post("/detect")
@@ -30,8 +45,8 @@ async def detect_fraud(file: UploadFile = File(...)):
         # Step 1: Build graph (PARSING + GRAPH_BUILT)
         graph = build_graph_from_csv(csv_bytes)
         
-        # Step 2: Detect cycles (CYCLES_DONE)
-        fraud_rings = detect_cycles(graph)
+        # Step 2: Detect cycles with timeout (CYCLES_DONE)
+        fraud_rings = await run_cycle_detection(graph, timeout=30)
         cycle_members = set()
         for ring in fraud_rings:
             cycle_members.update(ring['members'])
